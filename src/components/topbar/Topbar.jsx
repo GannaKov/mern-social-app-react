@@ -42,6 +42,7 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
+        <img src="/assets/person/frog-1.jpg" alt="" className="topbarImg" />
       </div>
     </div>
   );
