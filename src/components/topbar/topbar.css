@@ -59,10 +59,13 @@
   display: flex;
 }
 .topbarIconItem {
-  margin-right: 15px;
+  /* margin-right: 15px; */
   cursor: pointer;
   position: relative;
   /* width: 18px; */
+}
+.topbarIconItem:not(:last-child) {
+  margin-right: 15px;
 }
 .topbarIconBadge {
   width: 13px;
