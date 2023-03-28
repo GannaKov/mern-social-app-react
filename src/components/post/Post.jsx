@@ -1,19 +1,23 @@
 import "./post.css";
 import { MdOutlineMoreVert } from "react-icons/md";
-// import { FcLike } from "react-icons/fc";
-export default function Post() {
+import { GoComment } from "react-icons/go";
+import { Users } from "../../dummyData";
+//----------------------
+export default function Post({ post }) {
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src="/assets/person/frog-1.jpg"
+              src={Users.find((u) => u.id === post.userId).profilePicture}
               alt=""
               className="postProfileImg"
             />
-            <span className="postUserName">First Frog</span>
-            <span className="postDate">5 min ago</span>
+            <span className="postUserName">
+              {Users.find((u) => u.id === post.userId).username}
+            </span>
+            <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">
             <MdOutlineMoreVert />
@@ -21,17 +25,18 @@ export default function Post() {
         </div>
 
         <div className="postCenter">
-          <span className="postText">Hey. it is my first post</span>
-          <img src="/assets/post/Palau.jpg" alt="" className="postImg" />
+          <span className="postText">{post?.desc}</span>
+          <img src={post.photo} alt="" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img src="/assets/like.png" alt="" className="likeIcon " />
             <img src="/assets/heart1.png" alt="" className="likeIcon " />
-            <span className="postLikeCounter">5</span>
+            <span className="postLikeCounter">{post.like}</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">9 comments</span>
+            <span className="postCommentText">{post.comment}</span>
+            <GoComment />
           </div>
         </div>
       </div>

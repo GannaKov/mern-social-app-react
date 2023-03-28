@@ -53,7 +53,7 @@ export const Posts = [
   },
   {
     id: 2,
-    photo: "assets/post/Maddalena.JPG",
+    photo: "assets/post/La Maddalena.JPG",
     date: "15 mins ago",
     userId: 2,
     like: 2,
@@ -104,7 +104,7 @@ export const Posts = [
   },
   {
     id: 8,
-    photo: "assets/post/8.jpg",
+    photo: "assets/post/Cala Degli Inglesi.JPG",
     date: "3 days ago",
     userId: 8,
     like: 15,
@@ -113,9 +113,9 @@ export const Posts = [
   {
     id: 9,
     desc: "Change the world by being yourself.",
-    photo: "assets/post/9.jpg",
+    photo: "assets/post/7.jpg",
     date: "5 days ago",
-    userId: 9,
+    userId: 3,
     like: 11,
     comment: 2,
   },
@@ -123,7 +123,7 @@ export const Posts = [
     id: 10,
     photo: "assets/post/10.jpg",
     date: "1 week ago",
-    userId: 10,
+    userId: 2,
     like: 104,
     comment: 12,
   },

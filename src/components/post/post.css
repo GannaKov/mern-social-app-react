@@ -68,9 +68,16 @@
 .postLikeCounter {
   font-size: 15px;
 }
-
-.postCommentText {
-  cursor: pointer;
+.postBottomRight {
+  display: flex;
+  align-items: center;
   border-bottom: 1px dashed gray;
+}
+.postCommentText {
+  /* display: flex;
+  align-items: center; */
+  cursor: pointer;
+
   font-size: 15px;
+  margin-right: 5px;
 }
