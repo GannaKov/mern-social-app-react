@@ -12,7 +12,9 @@ import {
   BsFillChatLeftTextFill,
   BsPlayCircleFill,
 } from "react-icons/bs";
-
+import { Users } from "../../dummyData";
+import CloseFriend from "../closeFriend/CloseFriend";
+//-----------------------------------
 export default function Sidebar() {
   return (
     <div className="sidebar">
@@ -58,46 +60,9 @@ export default function Sidebar() {
         <button className="sidebarButton">Show more</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/frog-2.jpg"
-              alt="Friend's"
-              className="sidebarfriendImg"
-            />
-            <span className="sidebarFriendName">Second Frog</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/frog-2.jpg"
-              alt="Friend's"
-              className="sidebarfriendImg"
-            />
-            <span className="sidebarFriendName">Second Frog</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/frog-2.jpg"
-              alt="Friend's"
-              className="sidebarfriendImg"
-            />
-            <span className="sidebarFriendName">Second Frog</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/frog-2.jpg"
-              alt="Friend's"
-              className="sidebarfriendImg"
-            />
-            <span className="sidebarFriendName">Second Frog</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/frog-2.jpg"
-              alt="Friend's"
-              className="sidebarfriendImg"
-            />
-            <span className="sidebarFriendName">Second Frog</span>
-          </li>
+          {Users.map((u) => (
+            <CloseFriend key={u.id} user={u} />
+          ))}
         </ul>
       </div>
     </div>
