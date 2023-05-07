@@ -11,6 +11,8 @@ export default function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -33,7 +35,7 @@ export default function Post({ post }) {
 
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img src={post.photo} alt="" className="postImg" />
+          <img src={PF + post.photo} alt="" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
