@@ -1,5 +1,5 @@
 import "./topbar.css";
-
+import { Link } from "react-router-dom";
 import {
   BsFillPersonFill,
   BsSearch,
@@ -12,7 +12,9 @@ export default function Topbar() {
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo">GannaSocial</span>
+        <Link to="/">
+          <span className="logo">GannaSocial</span>
+        </Link>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
