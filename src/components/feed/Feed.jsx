@@ -6,24 +6,25 @@ import "./feed.css";
 // import { Posts } from "../../dummyData";
 export default function Feed() {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const [post, setPost] = useState([]);
+  const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await axios.get(
-        `${BASE_URL}/posts/timeline/641c86a366edd65ab75b33ba`
+        `${BASE_URL}/posts/timeline/641c8b0b8e78252415bfd746`
       );
-      console.log(res);
+      setPosts(res.data);
     };
     fetchPosts();
-  }, []);
+  }, [BASE_URL]);
 
   return (
     <div className="feed">
       <div className="feedWrapper">
         <Share />
-        {/* {Posts.map((post) => (
-          <Post key={post.id} post={post} />
-        ))} */}
+        {posts.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
       </div>
     </div>
   );

@@ -1,17 +1,28 @@
 import "./post.css";
 import { MdOutlineMoreVert } from "react-icons/md";
 import { GoComment } from "react-icons/go";
-import { Users } from "../../dummyData";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { format } from "timeago.js";
 //----------------------
 export default function Post({ post }) {
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`${BASE_URL}/users/${post.userId}`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [BASE_URL, post.userId]);
 
   return (
     <div className="post">
@@ -19,14 +30,12 @@ export default function Post({ post }) {
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src={Users.find((u) => u.id === post.userId).profilePicture}
+              src={user.profilePicture || PF + "person/no_avatar.png"}
               alt=""
               className="postProfileImg"
             />
-            <span className="postUserName">
-              {Users.find((u) => u.id === post.userId).username}
-            </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postUserName">{user.username}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MdOutlineMoreVert />
@@ -35,7 +44,8 @@ export default function Post({ post }) {
 
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img src={PF + post.photo} alt="" className="postImg" />
+          <img src={PF + post.img} alt="" className="postImg" />
+          {/* PF!!!!!!! */}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
