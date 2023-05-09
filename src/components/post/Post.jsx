@@ -3,7 +3,8 @@ import { MdOutlineMoreVert } from "react-icons/md";
 import { GoComment } from "react-icons/go";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { format } from "timeago.js";
+import React from "react";
+import ReactTimeAgo from "react-time-ago";
 //----------------------
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -35,7 +36,10 @@ export default function Post({ post }) {
               className="postProfileImg"
             />
             <span className="postUserName">{user.username}</span>
-            <span className="postDate">{format(post.createdAt)}</span>
+            <span className="postDate">
+              <ReactTimeAgo date={new Date(post.createdAt)} locale="en-US" />
+              {/* {timeAgo.format(new Date(post.createdAt))} */}
+            </span>
           </div>
           <div className="postTopRight">
             <MdOutlineMoreVert />
