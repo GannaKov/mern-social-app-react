@@ -5,20 +5,22 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 //------------------------------------------------
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [user, setUser] = useState({});
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`${BASE_URL}/users?username=Koshka`);
+      const res = await axios.get(`${BASE_URL}/users?username=${username}`);
       setUser(res.data);
       console.log("hier in Prof", res.data);
     };
     fetchUser();
-  }, [BASE_URL]);
+  }, [BASE_URL, username]);
   return (
     <>
       <Topbar />
@@ -28,12 +30,12 @@ export default function Profile() {
           <div className="profileRightTop">
             <div className="profileCover">
               <img
-                src={`${PF}post/Cala Brandinchi 6.jpg`}
+                src={user.coverPicture || `${PF}person/no_cover.png`}
                 alt=""
                 className="profileCoverImg"
               />
               <img
-                src={`${PF}person/frog-1.jpg`}
+                src={user.profilelPicture || `${PF}person/no_avatar.png`}
                 alt=""
                 className="profileUserImg"
               />
@@ -44,7 +46,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username="Koshka" />
+            <Feed username={username} />
             <Rightbar user={user} />
           </div>
         </div>
