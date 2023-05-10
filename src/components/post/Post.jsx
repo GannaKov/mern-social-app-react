@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
 import ReactTimeAgo from "react-time-ago";
+import { Link } from "react-router-dom";
 //----------------------
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -19,8 +20,12 @@ export default function Post({ post }) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`${BASE_URL}/users/${post.userId}`);
-      setUser(res.data);
+      try {
+        const res = await axios.get(`${BASE_URL}/users?userId=${post.userId}`);
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchUser();
   }, [BASE_URL, post.userId]);
@@ -30,15 +35,17 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
-              src={user.profilePicture || PF + "person/no_avatar.png"}
-              alt=""
-              className="postProfileImg"
-            />
+            <Link to={`profile/${user.username}`}>
+              <img
+                src={user.profilePicture || PF + "person/no_avatar.png"}
+                alt=""
+                className="postProfileImg"
+              />
+            </Link>
+
             <span className="postUserName">{user.username}</span>
             <span className="postDate">
               <ReactTimeAgo date={new Date(post.createdAt)} locale="en-US" />
-              {/* {timeAgo.format(new Date(post.createdAt))} */}
             </span>
           </div>
           <div className="postTopRight">

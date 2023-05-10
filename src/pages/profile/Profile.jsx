@@ -3,9 +3,22 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 //------------------------------------------------
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`${BASE_URL}/users?username=Koshka`);
+      setUser(res.data);
+      console.log("hier in Prof", res.data);
+    };
+    fetchUser();
+  }, [BASE_URL]);
   return (
     <>
       <Topbar />
@@ -26,13 +39,13 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">First Frog</h4>
-              <span className="profileInfoDesc">Hallo my Friends</span>
+              <h4 className="profileInfoName">{user.username}</h4>
+              <span className="profileInfoDesc">{user.desc}</span>
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed />
-            <Rightbar profile />
+            <Feed username="Koshka" />
+            <Rightbar user={user} />
           </div>
         </div>
       </div>
