@@ -1,4 +1,5 @@
 import { useReducer, createContext } from "react";
+import AuthReducer from "./AuthReducer";
 
 const INITIAL_STATE = {
   user: null,
@@ -7,7 +8,7 @@ const INITIAL_STATE = {
 };
 export const AuthContext = createContext(INITIAL_STATE);
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AuthContext, INITIAL_STATE);
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
   return (
     <AuthContext.Provider
       value={{
