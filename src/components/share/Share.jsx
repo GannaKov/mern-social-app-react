@@ -1,17 +1,29 @@
 import "./share.css";
 import { MdPermMedia, MdLabel, MdLocationPin } from "react-icons/md";
 import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 export default function Share() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const { user } = useContext(AuthContext);
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
           <img
-            src="/assets/person/frog-1.jpg"
-            alt=""
+            src={
+              user.profilelPicture
+                ? user.profilelPicture
+                : PF + "person/no_avatar.png"
+            }
+            alt={user.username}
             className="shareProfileImg"
           />
-          <input placeholder="What's in your mind" className="shareInput" />
+          <input
+            placeholder={"What's in your mind " + user.username + "?"}
+            className="shareInput"
+          />
         </div>
         <hr className="shareHr" />
         <div className="shareBottom">
