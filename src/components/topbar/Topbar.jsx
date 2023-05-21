@@ -7,8 +7,12 @@ import {
 } from "react-icons/bs";
 
 import { MdNotifications } from "react-icons/md";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 //--------------------------------------
 export default function Topbar() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user } = useContext(AuthContext);
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -44,7 +48,17 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        <img src="/assets/person/frog-1.jpg" alt="" className="topbarImg" />
+        <Link to={`/profile/${user.username}`}>
+          <img
+            src={
+              user.profilelPicture
+                ? user.profilelPicture
+                : `${PF}person/no_avatar.png`
+            }
+            alt={user.username}
+            className="topbarImg"
+          />
+        </Link>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ function App() {
       </Route> */}
       <Route path="/profile/:username" element={<Profile />} />
 
-      <Route path="*" element={<Home />} />
+      <Route path="*" element={<Register />} />
     </Routes>
   );
 }

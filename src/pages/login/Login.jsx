@@ -3,19 +3,23 @@ import "./login.css";
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { useNavigate } from "react-router-dom";
+//--------------------------------------------------
 export default function Login() {
+  const navigate = useNavigate();
   const email = useRef();
   const password = useRef();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
-  console.log(user);
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
     );
+  };
+  const handleClick = () => {
+    navigate("/register");
   };
   return (
     <div className="login">
@@ -25,7 +29,7 @@ export default function Login() {
           <span className="loginDesc">Be with your friends on GannaSocial</span>
         </div>
         <div className="loginRight">
-          <form className="loginBox" onSubmit={handleClick}>
+          <form className="loginBox" onSubmit={handleSubmit}>
             <input
               placeholder="Email"
               type="email"
@@ -50,14 +54,14 @@ export default function Login() {
               )}
             </button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              {isFetching ? (
-                <CircularProgress sx={{ color: "#fff" }} size={25} />
-              ) : (
-                " Create a New Account"
-              )}
-            </button>
           </form>
+          <button className="loginRegisterButton" onClick={handleClick}>
+            {isFetching ? (
+              <CircularProgress sx={{ color: "#fff" }} size={25} />
+            ) : (
+              " Create a New Account"
+            )}
+          </button>
         </div>
       </div>
     </div>
