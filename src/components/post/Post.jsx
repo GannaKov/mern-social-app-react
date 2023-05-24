@@ -70,7 +70,9 @@ export default function Post({ post }) {
 
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img src={PF + post.img} alt={post?.desc} className="postImg" />
+          {post.img && (
+            <img src={PF + post.img} alt={post?.desc} className="postImg" />
+          )}
           {/* PF!!!!!!! */}
         </div>
         <div className="postBottom">

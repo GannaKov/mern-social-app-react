@@ -5,18 +5,39 @@ import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 //------------------------------------------
-export default function Share() {
+export default function Share({ onSubm }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const { user } = useContext(AuthContext);
   const desc = useRef();
   const [file, setFile] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = { userId: user._id, desc: desc.current.value };
+    if (file) {
+      console.log(file);
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+
+      console.log("fileName", fileName);
+      data.append("file", file);
+      data.append("name", fileName);
+
+      newPost.img = fileName;
+      try {
+        await axios.post(`${BASE_URL}/upload`, data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     try {
       await axios.post(`${BASE_URL}/posts`, newPost);
-    } catch (err) {}
+      // window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+    onSubm(true);
   };
   return (
     <div className="share">
@@ -38,7 +59,11 @@ export default function Share() {
           />
         </div>
         <hr className="shareHr" />
-        <form className="shareBottom" onSubmit={handleSubmit}>
+        <form
+          className="shareBottom"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <MdPermMedia style={{ color: "tomato" }} className="shareIcon" />
