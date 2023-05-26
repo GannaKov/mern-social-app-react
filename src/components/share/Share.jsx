@@ -15,12 +15,11 @@ export default function Share({ onSubm }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = { userId: user._id, desc: desc.current.value };
+    console.log("desc.current", desc.current.value);
     if (file) {
-      console.log(file);
       const data = new FormData();
       const fileName = Date.now() + file.name;
 
-      console.log("fileName", fileName);
       data.append("file", file);
       data.append("name", fileName);
 
@@ -37,6 +36,7 @@ export default function Share({ onSubm }) {
     } catch (err) {
       console.log(err);
     }
+    desc.current.value = "";
     onSubm(true);
   };
   return (
