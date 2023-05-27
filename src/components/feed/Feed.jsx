@@ -32,7 +32,7 @@ export default function Feed({ username }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {username === user.username && <Share onSubm={onSubm} />}
+        {(!username || username === user.username) && <Share onSubm={onSubm} />}
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}

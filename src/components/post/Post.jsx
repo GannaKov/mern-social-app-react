@@ -5,11 +5,12 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import React from "react";
 import ReactTimeAgo from "react-time-ago";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 //----------------------
 export default function Post({ post }) {
+  const location = useLocation();
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [like, setLike] = useState(post.likes.length);
@@ -26,14 +27,17 @@ export default function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes]);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await axios.get(`${BASE_URL}/users?userId=${post.userId}`);
         setUser(res.data);
+        // console.log("In Post res.data.username", res.data.username);
       } catch (err) {
         console.log(err);
       }
@@ -46,7 +50,19 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`profile/${user.username}`}>
+            {location.pathname !== `/profile/${user.username}` ? (
+              <Link to={`profile/${user.username}`}>
+                <img
+                  src={
+                    user.profilePicture
+                      ? user.profilePicture
+                      : PF + "person/no_avatar.png"
+                  }
+                  alt={user.username}
+                  className="postProfileImg"
+                />
+              </Link>
+            ) : (
               <img
                 src={
                   user.profilePicture
@@ -56,7 +72,7 @@ export default function Post({ post }) {
                 alt={user.username}
                 className="postProfileImg"
               />
-            </Link>
+            )}
 
             <span className="postUserName">{user.username}</span>
             <span className="postDate">
