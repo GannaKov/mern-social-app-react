@@ -24,10 +24,10 @@ export default function Rightbar({ user }) {
   // }, [currentUser, user._id]);
 
   useEffect(() => {
-    console.log("user?", user);
+    // console.log("user?", user);
 
-    console.log("currentUser", currentUser);
-    console.log("followed", followed);
+    // console.log("currentUser", currentUser);
+    // console.log("followed", followed);
     const getFriends = async () => {
       try {
         const friendList = await axios.get(

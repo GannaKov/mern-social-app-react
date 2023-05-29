@@ -2,6 +2,7 @@ import "./share.css";
 import { MdPermMedia, MdLabel, MdLocationPin } from "react-icons/md";
 import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
 import { useContext, useRef, useState } from "react";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 //------------------------------------------
@@ -15,7 +16,7 @@ export default function Share({ onSubm }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = { userId: user._id, desc: desc.current.value };
-    console.log("desc.current", desc.current.value);
+    // console.log("desc.current", desc.current.value);
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
@@ -37,8 +38,10 @@ export default function Share({ onSubm }) {
       console.log(err);
     }
     desc.current.value = "";
+    setFile(null);
     onSubm(true);
   };
+
   return (
     <div className="share">
       <div className="shareWrapper">
@@ -59,6 +62,16 @@ export default function Share({ onSubm }) {
           />
         </div>
         <hr className="shareHr" />
+        {file && (
+          <div className="shareImgContainer">
+            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+            <CancelIcon
+              className="shareCancelImg "
+              onClick={() => setFile(null)}
+            />
+          </div>
+        )}
+
         <form
           className="shareBottom"
           onSubmit={handleSubmit}
