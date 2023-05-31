@@ -31,7 +31,7 @@ export const Users = [
   },
   {
     id: 7,
-    profilePicture: "person/frog-7.png",
+    profilePicture: "person/frog-6.png",
     username: "Travis Bennett",
   },
   {

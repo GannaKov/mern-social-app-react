@@ -17,6 +17,7 @@ export default function Rightbar({ user }) {
 
   useEffect(() => {
     if (user._id) {
+      setFollowed(currentUser.followings.includes(user?._id));
       const getFriends = async () => {
         try {
           const friendList = await axios.get(
@@ -29,7 +30,7 @@ export default function Rightbar({ user }) {
       };
       getFriends();
     }
-  }, [BASE_URL, user._id]);
+  }, [BASE_URL, currentUser.followings, user._id]);
 
   const handleClick = async () => {
     try {

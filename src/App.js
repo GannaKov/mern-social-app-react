@@ -6,6 +6,7 @@ import { lazy, Suspense } from "react";
 // import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import CircularProgress from "@mui/material/CircularProgress";
 // import Topbar from "./components/topbar/Topbar";
 const Home = lazy(() => import("./pages/home/Home"));
 const Profile = lazy(() => import("./pages/profile/Profile"));
@@ -17,7 +18,15 @@ function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div
+          style={{ display: "flex", justifyContent: "center", marginTop: 50 }}
+        >
+          <CircularProgress sx={{ color: "primary" }} size={50} />
+        </div>
+      }
+    >
       {/* <Routes>
         <Route path="/" element={user ? <Home /> : <Register />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />

@@ -2,7 +2,7 @@ import "./profile.css";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Topbar from "../../components/topbar/Topbar";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -10,8 +10,9 @@ import { useParams } from "react-router-dom";
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const { username } = useParams();
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchUser = async () => {

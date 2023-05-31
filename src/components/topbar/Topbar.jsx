@@ -17,7 +17,6 @@ export default function Topbar() {
 
   return (
     <>
-      {" "}
       <div className="topbarContainer">
         <div className="topbarLeft">
           <Link to="/">
