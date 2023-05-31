@@ -127,6 +127,7 @@ export default function Rightbar({ user }) {
     <div className="rightbar">
       <div className="rightbarWrapper">
         {user ? <ProfileRightBar /> : <HomeRightbar />}
+        {/* //currentUser._id === user._id ? */}
       </div>
     </div>
   );

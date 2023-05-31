@@ -23,7 +23,7 @@ export default function Profile() {
   }, [BASE_URL, username]);
   return (
     <>
-      <Topbar />
+      {/* <Topbar /> */}
       <div className="profile">
         <Sidebar />
         <div className="profileRight">
