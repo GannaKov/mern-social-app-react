@@ -7,7 +7,8 @@ import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, isFetching } = useContext(AuthContext);
+  console.log("isFetching", isFetching);
   return (
     <Routes>
       <Route path="/" element={user ? <Home /> : <Register />} />

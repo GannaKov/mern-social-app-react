@@ -15,31 +15,21 @@ export default function Rightbar({ user }) {
     currentUser.followings.includes(user?._id)
   );
 
-  // useEffect(() => {
-  //   setFollowed(currentUser.followings.includes(user?._id));
-  //   console.log("user?", user);
-
-  //   console.log("currentUser", currentUser);
-  //   console.log("followed", followed);
-  // }, [currentUser, user._id]);
-
   useEffect(() => {
-    // console.log("user?", user);
-
-    // console.log("currentUser", currentUser);
-    // console.log("followed", followed);
-    const getFriends = async () => {
-      try {
-        const friendList = await axios.get(
-          `${BASE_URL}/users/friends/${user._id}`
-        );
-        setFriends(friendList.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getFriends();
-  }, [BASE_URL, user]); //user._id
+    if (user._id) {
+      const getFriends = async () => {
+        try {
+          const friendList = await axios.get(
+            `${BASE_URL}/users/friends/${user._id}`
+          );
+          setFriends(friendList.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getFriends();
+    }
+  }, [BASE_URL, user._id]);
 
   const handleClick = async () => {
     try {

@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
+
   return (
     <>
       <Topbar />
